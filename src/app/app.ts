@@ -28,17 +28,16 @@ export class App {
   constructor(private sanitizer: DomSanitizer) {
     const rawProjects: Project[] = [
       {
-        title: 'Neelemanet',
-        description: 'You\'re currently on Neelemanet! I created neelemanet because for years I have had trouble setting up SSL certificates on my small hobby projects. Neelemanet uses an ALB to encrypt and decrypt HTTPS traffic and send it to backend ec2 instances as HTTP traffic. Simple static pages like this one do not route through the ALB and instead use the CERT of a hosting service like Vercel/GitHub Pages.',
+        title: 'SSL Proxy',
+        description: 'For years I have had trouble setting up SSL certificates on my small hobby projects. Each time I set up a new project I would have to set up a new SSL certificate and inevitably debug some aspect I forgot to setup. This proxy uses an ALB to encrypt and decrypt HTTPS traffic and send it to backend ec2 instances as HTTP traffic. The site you\'re on right now uses this proxy extensively. Simple static pages like this one do not route through the ALB and instead use the CERT of a hosting service like Vercel/GitHub Pages.',
         htmlTags: [
-          '<img src="load_balancer.png" alt="Load Balancer Architecture" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">',
-          '<iframe src="https://limbo.neelema.net" width="100%" height="600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
+          '<img src="load_balancer.png" alt="Load Balancer Architecture" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">'
         ]
       },
       {
         title: 'ICBM KKV Interceptor',
         link: 'https://github.com/icanthink42/kkv_interceptor',
-        description: `At the end of my spaceflight mechanics class we were tasked with doing an open-ended project. I decided to write a program in Rust to perform a Monte Carlo simulation of KKV ICBM interception. The program finds a range of possible interceptions and then performs an orbital mechanics simulation with added uncertainty in the burn to determine what burn minimizes the possibility of missing the target.`,
+        description: `At the end of my spaceflight mechanics class, we were tasked with doing an open-ended project. I decided to write a program in Rust to perform a Monte Carlo simulation of KKV ICBM interception. The program finds a range of possible interceptions and then performs an orbital mechanics simulation with added uncertainty in the burn to determine what burn minimizes the possibility of missing the target.`,
         htmlTags: [
           '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot1.html" width="100%" height="600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>',
           '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot2.html" width="100%" height="600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>',
@@ -74,7 +73,7 @@ export class App {
       {
         title: 'Javascript Memory Visualizer',
         link: 'https://memory.neelema.net/',
-        description: 'I talk with a lot of engineers who program often in Matlab and Python but rarely venture into the land of languages like C or C++. To this crowd, pointers are a scary concept because they are seen as a low level concept that only exists on \'real\' programming languages. The reality of programming is that pointers always exist, and no matter how hard a language tries to hide them, you need to understand them to program. I wrote this program to attempt to demonstrate what a pointer is in a familiar context. I facetiously put \'Even Bad Languages Have Pointers\' in the title.',
+        description: 'I talk with a lot of engineers who program often in Matlab and Python, but rarely venture into the land of languages like C or C++. To this crowd, pointers are a scary concept because they are seen as a low level concept that only exists on \'real\' programming languages. The reality of programming is that pointers always exist, and no matter how hard a language tries to hide them, you need to understand them to program. I wrote this program to attempt to demonstrate what a pointer is in a familiar context. I facetiously put \'Even Bad Languages Have Pointers\' in the title.',
         htmlTags: [
           '<iframe src="https://memory.neelema.net/" width="100%" height="1600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
         ]
@@ -85,6 +84,14 @@ export class App {
         description: 'I have been a huge fan of the calculator Desmos for a long time. I orignally started using in high school for homework, but since then I\'ve had a lot of fun playing around with all the quasi-programming features they\'ve added over the years. Back when I had a lot more free time I wrote this flight simulator using those features. I also wrote an <a href="https://www.desmos.com/calculator/t5pj25dz7g" target="_blank" rel="noopener">n-body simulator in Desmos</a>.',
         htmlTags: [
           '<iframe src="https://www.desmos.com/calculator/ixfvv2bode" width="100%" height="1200" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
+        ]
+      },
+      {
+        title: 'Entropy Simulation',
+        link: 'https://entropy.neelema.net',
+        description: 'I came up with the idea for this small simulation when talking with my Dad about the nature of entropy. I was arguing that entropy is not a physical law but rather a statistical law. I wrote this simulation to demonstrate this idea. The simulation I wrote has very simple laws, praticles bounce off walls and each other, and particles move at constant velocity. When you click inside the simulation, you can add particles to the system. This decrases the specific entropy as the new particles have fewer degrees of freedom. Overtime the system naturally moves to a state of maximum entropy. The point I was trying to make about entropy is that is is a result of simple natrual laws that maximize the number of possible configurations of a system. Entropy is not a physical law, it is a statistical law.',
+        htmlTags: [
+          '<iframe src="https://entropy.neelema.net" width="100%" height="1200" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
         ]
       }
     ];
