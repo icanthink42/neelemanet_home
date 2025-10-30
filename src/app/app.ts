@@ -78,6 +78,14 @@ export class App {
         htmlTags: [
           '<iframe src="https://memory.neelema.net/" width="100%" height="1600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
         ]
+      },
+      {
+        title: 'A Flight Simulator Built in a Calculator',
+        link: 'https://www.desmos.com/calculator/ixfvv2bode',
+        description: 'I have been a huge fan of the calculator Desmos for a long time. I orignally started using in high school for homework, but since then I\'ve had a lot of fun playing around with all the quasi-programming features they\'ve added over the years. Back when I had a lot more free time I wrote this flight simulator using those features. I also wrote an <a href="https://www.desmos.com/calculator/t5pj25dz7g" target="_blank" rel="noopener">n-body simulator in Desmos</a>.',
+        htmlTags: [
+          '<iframe src="https://www.desmos.com/calculator/ixfvv2bode" width="100%" height="1200" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
+        ]
       }
     ];
 
