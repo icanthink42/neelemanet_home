@@ -28,10 +28,15 @@ export class App {
   constructor(private sanitizer: DomSanitizer) {
     const rawProjects: Project[] = [
       {
-        title: 'SSL Proxy',
-        description: 'For years I have had trouble setting up SSL certificates on my small hobby projects. Each time I set up a new project I would have to set up a new SSL certificate and inevitably debug some aspect I forgot to setup. This proxy uses an ALB to encrypt and decrypt HTTPS traffic and send it to backend ec2 instances as HTTP traffic. The site you\'re on right now uses this proxy extensively. Simple static pages like this one do not route through the ALB and instead use the CERT of a hosting service like Vercel/GitHub Pages.',
+        title: 'Alpha Solve',
+        link: 'https://github.com/icanthink42/alpha_solve',
+        description: 'Inspired by my favorite calculator, Desmos, I wrote a plugin based calculator that allows the user to solve problems both symbolically and numerically. The calculator is split up into three main parts: the plugin manager, the python executor, and the project. Plugins are written in Python and executed with a WASM compiled cython interpreter so pythons powerful symbolic solving libraries can be utilized. I aim to make writing a plugin as simple as possible so people with expert math skills and minimal programming skills can contribute. <a href="https://github.com/icanthink42/alpha_solve/blob/main/docs/plugin-development.md" target="_blank">Plugin creation docs</a>',
         htmlTags: [
-          '<img src="load_balancer.png" alt="Load Balancer Architecture" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">'
+          '<iframe src="https://alphasolve.neelema.net/" width="100%" height="1200" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>',
+          '<img src="quadratic_alphasolve.png" alt="Alpha Solve Quadratic Example" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">',
+          '<img src="diffeq_alphasolve.png" alt="Alpha Solve Differential Equation Example" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">',
+          '<img src="idealgass_alphasolve.png" alt="Alpha Solve Ideal Gas Example" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">',
+          '<img src="integral_alphasolve.png" alt="Alpha Solve Integral Example" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">'
         ]
       },
       {
@@ -39,9 +44,9 @@ export class App {
         link: 'https://github.com/icanthink42/kkv_interceptor',
         description: `At the end of my spaceflight mechanics class, we were tasked with doing an open-ended project. I decided to write a program in Rust to perform a Monte Carlo simulation of KKV ICBM interception. The program finds a range of possible interceptions and then performs an orbital mechanics simulation with added uncertainty in the burn to determine what burn minimizes the possibility of missing the target.`,
         htmlTags: [
-          '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot1.html" width="100%" height="600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>',
-          '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot2.html" width="100%" height="600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>',
-          '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot3.html" width="100%" height="600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
+          '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot1.html" width="100%" height="1200" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>',
+          '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot2.html" width="100%" height="1200" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>',
+          '<iframe src="https://icanthink42.github.io/spaceflight_mechanics_plots/plot3.html" width="100%" height="1200" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
         ]
       },
       {
@@ -76,6 +81,13 @@ export class App {
         description: 'I talk with a lot of engineers who program often in Matlab and Python, but rarely venture into the land of languages like C or C++. To this crowd, pointers are a scary concept because they are seen as a low level concept that only exists on \'real\' programming languages. The reality of programming is that pointers always exist, and no matter how hard a language tries to hide them, you need to understand them to program. I wrote this program to attempt to demonstrate what a pointer is in a familiar context. I facetiously put \'Even Bad Languages Have Pointers\' in the title.',
         htmlTags: [
           '<iframe src="https://memory.neelema.net/" width="100%" height="1600" frameborder="0" style="border:1px solid #e0e0e0;border-radius:4px;"></iframe>'
+        ]
+      },
+      {
+        title: 'SSL Proxy',
+        description: 'For years I have had trouble setting up SSL certificates on my small hobby projects. Each time I set up a new project I would have to set up a new SSL certificate and inevitably debug some aspect I forgot to setup. This proxy uses an ALB to encrypt and decrypt HTTPS traffic and send it to backend ec2 instances as HTTP traffic. The site you\'re on right now uses this proxy extensively. Simple static pages like this one do not route through the ALB and instead use the CERT of a hosting service like Vercel/GitHub Pages.',
+        htmlTags: [
+          '<img src="load_balancer.png" alt="Load Balancer Architecture" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">'
         ]
       },
       {
