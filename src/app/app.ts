@@ -46,7 +46,7 @@ export class App {
       },
       {
         title: 'Rust Generalsio Rewrite',
-        link: 'https://generals.neelema.net/',
+        link: 'https://github.com/icanthink42/generals',
         description: 'At Breeze, we would play a game called Generals.io after work on Fridays. I decided to rewrite the game entirely in Rust. Both the front end and backend are written in Rust in the same codebase. The backend compiles to x86 while the frontend compiles to WASM. This was a difficult setup due to the fact that they have a shared library that must compile to both x86 and WASM. This is obviously overkill for a simple game, but it was fun. I am a strong believer in defining data structures in a way that does not allow for invalid state to exist. The powerful Rust typing system along with keeping the frontend and backend both in the same codebase allowed me to do exactly that.',
         htmlTags: [
           '<img src="generals.png" alt="Rust Generals.io Screenshot" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">'
