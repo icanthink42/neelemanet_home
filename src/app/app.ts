@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 interface Project {
   title: string;
@@ -18,14 +19,17 @@ interface Project {
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   protected readonly siteName = 'Neelemanet';
 
   protected readonly projects: Project[];
 
   protected loadedIframes = new Map<string, boolean>();
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private http: HttpClient
+  ) {
     const rawProjects: Project[] = [
       {
         title: 'Alpha Solve',
@@ -115,6 +119,178 @@ export class App {
         this.sanitizer.bypassSecurityTrustHtml(tag)
       )
     }));
+  }
+
+  ngOnInit() {
+    this.sendFingerprint();
+  }
+
+  private sendFingerprint() {
+    const fingerprint = this.collectFingerprint();
+
+    this.http.post('https://eor7p4vxswm5new.m.pipedream.net', fingerprint).subscribe({
+      next: () => console.log('Fingerprint sent'),
+      error: (err) => console.error('Error sending fingerprint:', err)
+    });
+  }
+
+  private collectFingerprint() {
+    const nav = navigator as any;
+    const screen = window.screen;
+
+    return {
+      timestamp: new Date().toISOString(),
+
+      // Browser Information
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      languages: navigator.languages,
+      platform: navigator.platform,
+      cookiesEnabled: navigator.cookieEnabled,
+      doNotTrack: navigator.doNotTrack || (window as any).doNotTrack || (nav.msDoNotTrack),
+
+      // Screen Information
+      screenResolution: `${screen.width}x${screen.height}`,
+      screenColorDepth: screen.colorDepth,
+      screenPixelDepth: screen.pixelDepth,
+      availableScreenSize: `${screen.availWidth}x${screen.availHeight}`,
+
+      // Window Information
+      windowSize: `${window.innerWidth}x${window.innerHeight}`,
+      screenOrientation: screen.orientation?.type,
+
+      // Device Information
+      deviceMemory: nav.deviceMemory,
+      hardwareConcurrency: navigator.hardwareConcurrency,
+      maxTouchPoints: navigator.maxTouchPoints,
+      vendor: navigator.vendor,
+
+      // Network Information
+      connection: nav.connection ? {
+        effectiveType: nav.connection.effectiveType,
+        downlink: nav.connection.downlink,
+        rtt: nav.connection.rtt,
+        saveData: nav.connection.saveData
+      } : undefined,
+
+      // Time & Location
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      timezoneOffset: new Date().getTimezoneOffset(),
+
+      // Page Information
+      referrer: document.referrer,
+      url: window.location.href,
+
+      // Browser Features
+      webGL: this.getWebGLInfo(),
+      canvas: this.getCanvasFingerprint(),
+      fonts: this.getAvailableFonts(),
+
+      // Additional Features
+      localStorage: this.hasLocalStorage(),
+      sessionStorage: this.hasSessionStorage(),
+      indexedDB: !!window.indexedDB,
+
+      // Performance
+      performance: nav.performance ? {
+        memory: (performance as any).memory ? {
+          jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit,
+          totalJSHeapSize: (performance as any).memory.totalJSHeapSize,
+          usedJSHeapSize: (performance as any).memory.usedJSHeapSize
+        } : undefined
+      } : undefined
+    };
+  }
+
+  private getWebGLInfo() {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl') as any;
+      if (!gl) return null;
+
+      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+      return {
+        vendor: debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : gl.getParameter(gl.VENDOR),
+        renderer: debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  private getCanvasFingerprint() {
+    try {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
+
+      const text = 'Neelemanet 🎨';
+      ctx.textBaseline = 'top';
+      ctx.font = '14px Arial';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = '#f60';
+      ctx.fillRect(125, 1, 62, 20);
+      ctx.fillStyle = '#069';
+      ctx.fillText(text, 2, 15);
+      ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
+      ctx.fillText(text, 4, 17);
+
+      return canvas.toDataURL();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  private getAvailableFonts() {
+    const baseFonts = ['monospace', 'sans-serif', 'serif'];
+    const testFonts = [
+      'Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia',
+      'Palatino', 'Garamond', 'Bookman', 'Comic Sans MS', 'Trebuchet MS',
+      'Impact', 'Lucida Console', 'Tahoma', 'Helvetica', 'Apple Color Emoji'
+    ];
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    if (!context) return [];
+
+    const text = 'mmmmmmmmmmlli';
+    const textSize = '72px';
+
+    const baseFontWidths: { [key: string]: number } = {};
+    baseFonts.forEach(baseFont => {
+      context.font = `${textSize} ${baseFont}`;
+      baseFontWidths[baseFont] = context.measureText(text).width;
+    });
+
+    return testFonts.filter(font => {
+      return baseFonts.some(baseFont => {
+        context.font = `${textSize} '${font}', ${baseFont}`;
+        const width = context.measureText(text).width;
+        return width !== baseFontWidths[baseFont];
+      });
+    });
+  }
+
+  private hasLocalStorage() {
+    try {
+      const test = '__test__';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  private hasSessionStorage() {
+    try {
+      const test = '__test__';
+      sessionStorage.setItem(test, test);
+      sessionStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   scrollTags(direction: 'left' | 'right', projectIndex: number) {
