@@ -25,11 +25,26 @@ header h1 {
   letter-spacing: -0.02em;
 }
 
-.subtitle {
-  font-size: 1rem;
+.contact-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.contact-links .author-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.contact-links a {
   color: #666;
-  margin: 0;
-  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-links a:hover {
+  color: #1a1a1a;
 }
 
 .projects {
