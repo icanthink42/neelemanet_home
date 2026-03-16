@@ -32,6 +32,20 @@ export class App implements OnInit {
   ) {
     const rawProjects: Project[] = [
       {
+        title: 'Project Venus/COSMOS Engine',
+        description: 'Large-scale spacecraft simulation engine written in Rust capable of simulating gravitational systems on the scale of galaxies. The Venus game wrapper, also written in Rust, implements a custom networking layer for multiplayer and GPU accelerated rendering of the simulation. Features a custom programmable Unix-based WASM computer for controlling spacecraft in the simulation with any language in a sandboxed environment. The screenshot shows a low earth orbit sunrise with realistic Rayleigh scattering rendered by the custom renderer and planetary terrain generation using fractal Perlin noise.',
+        htmlTags: [
+          '<img src="https://github.com/icanthink42/icanthink42/raw/main/venus.webp" alt="Low earth orbit sunrise showing realistic rayleigh scattering rendered by custom renderer and planetary terrain generation using fractal perlin noise" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">'
+        ]
+      },
+      {
+        title: 'Project Mercury',
+        description: 'Voxel-based game written in Rust with a custom renderer and engine. Uses greedy meshing, distance-based LODing, flood fill chunk culling, and numerous other performance optimizations to support enormous maps with thousands of NPCs. The screenshot shows voxel terrain utilizing chunk LODing to provide massive view distances, with one of 1000 pathfinding entities swimming in the water.',
+        htmlTags: [
+          '<img src="https://github.com/icanthink42/icanthink42/raw/main/mercury.webp" alt="Voxel terrain utilizing chunk LODing to provide massive view distances with pathfinding entities" style="width:100%; border:1px solid #e0e0e0; border-radius:4px;">'
+        ]
+      },
+      {
         title: 'Alpha Solve',
         link: 'https://github.com/icanthink42/alpha_solve',
         description: 'Inspired by my favorite calculator, Desmos, I wrote a plugin based calculator that allows the user to solve problems both symbolically and numerically. The calculator is split up into three main parts: the plugin manager, the python executor, and the project. Plugins are written in Python and executed with a WASM compiled cython interpreter so pythons powerful symbolic solving libraries can be utilized. I aim to make writing a plugin as simple as possible so people with expert math skills and minimal programming skills can contribute. <a href="https://github.com/icanthink42/alpha_solve/blob/main/docs/plugin-development.md" target="_blank">Plugin creation docs</a>',
